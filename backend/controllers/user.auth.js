@@ -2,6 +2,7 @@
 const models = require("../models");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+require("dotenv").config({ path: "../.env" });
 
 // signup function
 exports.signup = (req, res, next) => {
@@ -61,4 +62,42 @@ exports.signup = (req, res, next) => {
       }
     })
     .catch((error) => res.status(500).json({ error }));
+};
+
+// Login function
+
+exports.login = (req, res, next) => {
+  const { email, password } = req.body;
+
+  // Inputs verification
+  if (email == null || password == null) {
+    return res.status(400).json({ error: "paramètres manquants!" });
+  }
+
+  models.User.findOne({
+    where: { email: email },
+  })
+    .then((user) => {
+      if (user) {
+        bcrypt.compare(password, user.password).then((valid) => {
+          if (valid) {
+            res.status(200).json({
+              userId: user.id,
+              token: jwt.sign(
+                { userId: user.id, isAdmin: user.isAdmin },
+                process.env.TOKEN,
+                { expiresIn: "24h" }
+              ),
+            });
+          } else {
+            return res.status(401).json({ error: "mot de passe incorrect!" });
+          }
+        });
+      } else {
+        return res.status(401).json({ error: "cet utilisateur n'existe pas" });
+      }
+    })
+    .catch((error) =>
+      res.status(500).json({ error: "impossible de vérifier cet utilisateur" })
+    );
 };
