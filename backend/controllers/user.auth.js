@@ -7,6 +7,7 @@ const bcrypt = require("bcrypt");
 exports.signup = (req, res, next) => {
   const { firstName, lastName, email, password } = req.body;
 
+  //  inputs verification
   if (
     email == null ||
     firstName == null ||
@@ -16,7 +17,23 @@ exports.signup = (req, res, next) => {
     return res.status(400).json({ error: "il manque des paramètres!" });
   }
 
-  //   TODO vérifier la taille des pseudos et des regex
+  const emailRegex =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,255}$/;
+
+  if (!email.match(emailRegex)) {
+    return res
+      .status(400)
+      .json({ message: "le format de votre email n'est pas valide!" });
+  }
+
+  //   Password REGEX: 8 char minimum,1 Digit,1 LC,1 UC
+  if (!password.match(passwordRegex)) {
+    return res
+      .status(400)
+      .json({ message: "le format du mot de passe n'est pas valable" });
+  }
 
   models.User.findOne({
     attributes: ["email"],
@@ -33,7 +50,7 @@ exports.signup = (req, res, next) => {
             isAdmin: 0,
           })
             .then((newUser) => {
-              return res.status(201).json({ userId: newUser.id });
+              return res.status(201).json({ newUser });
             })
             .catch((error) =>
               res.status(500).json({ message: "cannot add user!" })
