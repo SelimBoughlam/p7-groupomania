@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 require("dotenv").config({ path: "../.env" });
 
 // signup function
-exports.signup = (req, res, next) => {
+exports.signup = (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
   //  inputs verification
@@ -66,7 +66,7 @@ exports.signup = (req, res, next) => {
 
 // Login function
 
-exports.login = (req, res, next) => {
+exports.login = (req, res) => {
   const { email, password } = req.body;
 
   // Inputs verification
@@ -81,14 +81,12 @@ exports.login = (req, res, next) => {
       if (user) {
         bcrypt.compare(password, user.password).then((valid) => {
           if (valid) {
-            res.status(200).json({
-              userId: user.id,
-              token: jwt.sign(
-                { userId: user.id, isAdmin: user.isAdmin },
-                process.env.TOKEN,
-                { expiresIn: "24h" }
-              ),
-            });
+            const token = jwt.sign(
+              { userId: user.id, isAdmin: user.isAdmin },
+              process.env.TOKEN,
+              { expiresIn: "24h" }
+            );
+            res.status(200).json({ userId: user.id, token });
           } else {
             return res.status(401).json({ error: "mot de passe incorrect!" });
           }
