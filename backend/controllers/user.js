@@ -28,3 +28,23 @@ exports.getOneUser = (req, res) => {
       res.status(500).json({ message: "une erreur est survenue" })
     );
 };
+
+// Modify user profile
+exports.updateUser = (req, res) => {
+  const updateUser = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    profileImage: req.file
+      ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+      : null,
+  };
+  models.User.update(updateUser, { where: { id: req.params.id } })
+    .then((update) => {
+      res
+        .status(200)
+        .json({ message: "votre profil à été mis à jours", update });
+    })
+    .catch((error) =>
+      res.status(500).json({ message: "une erreur est survenue" })
+    );
+};
