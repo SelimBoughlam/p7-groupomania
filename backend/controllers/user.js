@@ -38,13 +38,17 @@ exports.updateUser = (req, res) => {
       ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
       : null,
   };
-  models.User.update(updateUser, { where: { id: req.params.id } })
-    .then((update) => {
-      res
-        .status(200)
-        .json({ message: "votre profil à été mis à jours", update });
-    })
-    .catch((error) =>
-      res.status(500).json({ message: "une erreur est survenue" })
-    );
+  if (req.auth.userId != req.params.id) {
+    return res.status(403).json({ message: "requête non autorisée!" });
+  } else {
+    models.User.update(updateUser, { where: { id: req.params.id } })
+      .then((update) => {
+        res
+          .status(200)
+          .json({ message: "votre profil à été mis à jour", update });
+      })
+      .catch((error) =>
+        res.status(500).json({ message: "une erreur est survenue" })
+      );
+  }
 };
