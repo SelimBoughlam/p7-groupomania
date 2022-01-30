@@ -54,6 +54,7 @@ exports.updateMessage = (req, res) => {
           : null,
       };
       const filename = message.image.split("/images/")[1];
+      // deleting modified image from image file
       fs.unlink(`images/${filename}`, () => {
         models.Message.update(messageToUpadate, {
           where: { id: req.params.id, userId: req.auth.userId },
@@ -69,3 +70,24 @@ exports.updateMessage = (req, res) => {
 };
 
 // delete a message
+exports.deleteMessage = (req, res) => {
+  models.Message.findOne({ id: req.params.id })
+    .then((message) => {
+      if (!message) {
+        res.status(404).json({ message: "ce message n'existe pas!" });
+      }
+      if (message.userId != req.auth.userId) {
+        return res.status(403).json({ message: "requête non autorisée" });
+      }
+      const filename = message.image.split("/images/")[1];
+      // delete image from image folder
+      fs.unlink(`images/${filename}`, () => {
+        models.Message.destroy({ where: { id: req.params.id } })
+          .then(() => res.status(200).json({ message: "message supprimé!" }))
+          .catch((error) => res.status(400).json({ error }));
+      });
+    })
+    .catch((error) =>
+      res.status(500).json({ message: "une erreur est survenue!" })
+    );
+};

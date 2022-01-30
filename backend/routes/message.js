@@ -6,5 +6,6 @@ const upload = require("../middlewares/upload");
 router.post("/new", upload, messageCtrl.createMessage);
 router.get("/all", messageCtrl.getAllMessages);
 router.put("/:id", auth, upload, messageCtrl.updateMessage);
+router.delete("/:id", auth, messageCtrl.deleteMessage);
 
 module.exports = router;
