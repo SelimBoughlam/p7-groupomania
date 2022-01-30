@@ -1,4 +1,7 @@
 "use strict";
+
+const { sequelize } = require("../models");
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("Comments", {
@@ -8,7 +11,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      commentId: {
+      messageId: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
@@ -16,10 +19,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      like: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-      },
+
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,

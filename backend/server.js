@@ -5,6 +5,7 @@ require("dotenv").config({ path: "./.env" });
 const userAuthRoutes = require("./routes/user.auth");
 const userRoutes = require("./routes/user");
 const messageRoutes = require("./routes/message");
+const commentRoutes = require("./routes/comment");
 const path = require("path");
 
 // body parser from express
@@ -17,6 +18,7 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/api/auth", userAuthRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/messages", messageRoutes);
+app.use("/api/comments", commentRoutes);
 
 // Serveur
 app.listen(process.env.PORT, () => {
