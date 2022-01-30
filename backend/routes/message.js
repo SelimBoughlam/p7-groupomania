@@ -4,6 +4,7 @@ const auth = require("../middlewares/auth");
 const upload = require("../middlewares/upload");
 
 router.post("/new", upload, messageCtrl.createMessage);
-router.get("/all", auth, messageCtrl.getAllMessages);
+router.get("/all", messageCtrl.getAllMessages);
+router.put("/:id", auth, upload, messageCtrl.updateMessage);
 
 module.exports = router;
