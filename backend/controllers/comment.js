@@ -1,5 +1,4 @@
 const models = require("../models");
-const comment = require("../models/comment");
 
 exports.createComment = (req, res) => {
   const comment = {
@@ -29,7 +28,23 @@ exports.getAllComments = (req, res) => {
       res.status(500).json({ message: "une erreur est survenue!" })
     );
 };
-exports.getOneComment = (req, res) => {};
+exports.getOneComment = (req, res) => {
+  models.Comment.findOne({
+    id: req.params.id,
+  })
+    .then((comment) => {
+      if (!comment) {
+        return res
+          .status(404)
+          .json({ message: "ce commentaire n'existe pas!" });
+      } else {
+        return res.status(200).json(comment);
+      }
+    })
+    .catch((error) =>
+      res.status(500).json({ message: "une erreur est survenue!" })
+    );
+};
 
 exports.deleteComment = (req, res) => {
   models.Comment.findOne({
@@ -42,7 +57,7 @@ exports.deleteComment = (req, res) => {
           .json({ message: "ce commentaire n'existe pas!" });
       }
       if (req.auth.userId != comment.userId) {
-        return res.status(403).json({ message: "non autorisé!" });
+        return res.status(403).json({ message: "requête non autorisée!" });
       }
       models.Comment.destroy({
         where: { id: req.params.id, messageId: req.params.messageId },
