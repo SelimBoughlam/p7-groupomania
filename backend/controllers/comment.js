@@ -3,8 +3,8 @@ const models = require("../models");
 exports.createComment = (req, res) => {
   const comment = {
     comment: req.body.comment,
-    userId: req.body.userId,
-    messageId: req.params.id,
+    userId: req.auth.userId,
+    messageId: req.body.messageId,
   };
 
   models.Comment.create(comment)

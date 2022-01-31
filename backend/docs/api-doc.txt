@@ -1,0 +1,42 @@
+///////////SIGNUP//////////
+
+POST  /api/auth/signup
+attendu : {firstName,lastName,email,password}
+
+//////////LOGIN///////////
+
+POST  /api/auth/login
+attendu:{email,password}
+
+
+////////UPDATE USER////////
+
+PUT /api/users/:id
+attendu: {firstName,lastName,profileImage(file)}
+
+///////DELETE USER///////
+
+DELETE /api/users/:id
+
+
+
+////////CREATE A MESSAGE/////////
+
+POST /api/messages/new
+attendu:{userId,content,image}
+
+////////UPDATE A MESSAGE///////
+
+PUT /api/messages/:id
+attendu : {userId,content,image}
+
+//////DELETE A MESSAGE//////
+
+DELETE /api/messages/:id
+
+/////CREATE A COMMENT////
+
+POST /api/comments/new
+attendu: {comments,messageId}
+
+
