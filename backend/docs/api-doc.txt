@@ -36,7 +36,5 @@ DELETE /api/messages/:id
 
 /////CREATE A COMMENT////
 
-POST /api/comments/new
-attendu: {comments,messageId}
 
 

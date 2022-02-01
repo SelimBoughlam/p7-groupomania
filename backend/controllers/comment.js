@@ -4,7 +4,7 @@ exports.createComment = (req, res) => {
   const comment = {
     comment: req.body.comment,
     userId: req.auth.userId,
-    messageId: req.body.messageId,
+    messageId: req.params.messageId,
   };
 
   models.Comment.create(comment)
@@ -30,7 +30,10 @@ exports.getAllComments = (req, res) => {
 };
 exports.getOneComment = (req, res) => {
   models.Comment.findOne({
-    id: req.params.id,
+    where: {
+      id: req.params.id,
+      messageId: req.params.messageId,
+    },
   })
     .then((comment) => {
       if (!comment) {

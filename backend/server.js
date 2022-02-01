@@ -18,7 +18,7 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/api/auth", userAuthRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/messages", messageRoutes);
-app.use("/api/comments", commentRoutes);
+app.use("/api/messages", commentRoutes);
 
 // Serveur
 app.listen(process.env.PORT, () => {
