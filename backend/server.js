@@ -14,6 +14,20 @@ app.use(express.json());
 // static path for images folder
 app.use("/images", express.static(path.join(__dirname, "images")));
 
+//CORS
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+  );
+  next();
+});
+
 // Routers
 app.use("/api/auth", userAuthRoutes);
 app.use("/api/users", userRoutes);
