@@ -1,67 +1,81 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
+import { useForm } from "react-hook-form";
+
+const emailRegex =
+  // eslint-disable-next-line no-useless-escape
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,255}$/;
 
 const SignupForm = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const postSignup = (e) => {
-    e.preventDeafault();
-    axios({
-      method: "post",
-      url: "http://localhost:5000/api/auth/signup",
-      withCredentials: true,
-      data: {
-        firstName,
-        lastName,
-        email,
-        password,
-      },
-    });
+  const onSubmit = (data) => {
+    console.log(data.lastName);
   };
 
   return (
-    <div className="form-container">
-      <form action="" onSubmit={postSignup} id="signup-form">
+    <div className="form-container is-invalid">
+      <form onSubmit={handleSubmit(onSubmit)} id="signup-form">
         <h1>Créer un compte</h1>
         <input
+          aria-label="Nom"
           type="text"
           name="lastname"
           id="lastname"
-          onChange={(e) => setLastName(e.target.value)}
-          value={lastName}
           placeholder="Nom"
+          {...register("lastName", { required: true })}
         />
-
+        {errors.lastName && errors.lastName.type === "required" && (
+          <span>Veuillez entrer votre nom</span>
+        )}
         <input
+          aria-label="Prénom"
           type="text"
           name="firstname"
           id="firstname"
-          onChange={(e) => setFirstName(e.target.value)}
-          value={firstName}
           placeholder="Prénom"
+          {...register("firstName", { required: true })}
         />
-
+        {errors.firstName && errors.firstName.type === "required" && (
+          <span>Veuillez entrer votre prénom</span>
+        )}
         <input
+          aria-label="email"
           type="text"
           name="email"
           id="email"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
           placeholder="Email"
+          {...register("email", { required: true, pattern: emailRegex })}
         />
-
+        {errors.email && errors.email.type === "required" && (
+          <span>Veuillez entrer votre email</span>
+        )}
+        {errors.email && errors.email.type === "pattern" && (
+          <span>le format de votre email n'est pas valide</span>
+        )}
         <input
+          aria-label="mot de passe"
           type="password"
           name="password"
           id="password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
           placeholder="Mot de passe"
+          {...register("password", { required: true, pattern: passwordRegex })}
         />
+        {errors.password && errors.password.type === "required" && (
+          <span>Veuillez entrer votre mot de passe</span>
+        )}
 
+        {errors.password && errors.password.type === "pattern" && (
+          <span>
+            Votre mot de passe doit contenir:8 caractères minimum,un chiffre,une
+            majuscule et une minuscule{" "}
+          </span>
+        )}
         <input type="submit" value="créer un compte" />
       </form>
     </div>
@@ -69,3 +83,19 @@ const SignupForm = () => {
 };
 
 export default SignupForm;
+
+// axios({
+//     method: "post",
+//     url: "http://localhost:5000/api/auth/signup",
+//     withCredentials: false,
+//     data: {
+//       firstName,
+//       lastName,
+//       email,
+//       password,
+//     },
+//   })
+//     .then((res) => {
+//       console.log(res);
+//     })
+//     .catch((error) => console.log(error));
