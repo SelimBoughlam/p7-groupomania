@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 const emailRegex =
   // eslint-disable-next-line no-useless-escape
@@ -11,15 +12,38 @@ const SignupForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm();
+    setError,
+    formState: { errors, isSubmitSuccessful },
+  } = useForm({
+    mode: "onTouched",
+  });
 
   const onSubmit = (data) => {
-    console.log(data.lastName);
+    if (isSubmitSuccessful) {
+      axios({
+        method: "post",
+        url: "http://localhost:5000/api/auth/signup",
+        withCredentials: false,
+        data: data,
+      })
+        .then((res) => {
+          if (res.status === 201) {
+            window.location = "/";
+          }
+        })
+        .catch((error) => {
+          if (error.response.status === 409) {
+            setError("email", {
+              type: "server",
+              message: error.response.data.message,
+            });
+          }
+        });
+    }
   };
 
   return (
-    <div className="form-container is-invalid">
+    <div className="form-container ">
       <form onSubmit={handleSubmit(onSubmit)} id="signup-form">
         <h1>Créer un compte</h1>
         <input
@@ -33,6 +57,7 @@ const SignupForm = () => {
         {errors.lastName && errors.lastName.type === "required" && (
           <span>Veuillez entrer votre nom</span>
         )}
+
         <input
           aria-label="Prénom"
           type="text"
@@ -44,6 +69,7 @@ const SignupForm = () => {
         {errors.firstName && errors.firstName.type === "required" && (
           <span>Veuillez entrer votre prénom</span>
         )}
+
         <input
           aria-label="email"
           type="text"
@@ -58,6 +84,12 @@ const SignupForm = () => {
         {errors.email && errors.email.type === "pattern" && (
           <span>le format de votre email n'est pas valide</span>
         )}
+        {errors.email && errors.email.type === "server" && (
+          <span>{errors.email.message}</span>
+        )}
+
+        <span className="error"></span>
+
         <input
           aria-label="mot de passe"
           type="password"
@@ -69,13 +101,13 @@ const SignupForm = () => {
         {errors.password && errors.password.type === "required" && (
           <span>Veuillez entrer votre mot de passe</span>
         )}
-
         {errors.password && errors.password.type === "pattern" && (
           <span>
             Votre mot de passe doit contenir:8 caractères minimum,un chiffre,une
-            majuscule et une minuscule{" "}
+            majuscule et une minuscule
           </span>
         )}
+
         <input type="submit" value="créer un compte" />
       </form>
     </div>

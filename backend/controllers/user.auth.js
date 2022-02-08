@@ -58,7 +58,7 @@ exports.signup = (req, res) => {
             );
         });
       } else {
-        return res.status(409).json({ message: "utilisateur existe déja" });
+        return res.status(409).json({ message: "Cet email est déja pris!" });
       }
     })
     .catch((error) => res.status(500).json({ error }));
