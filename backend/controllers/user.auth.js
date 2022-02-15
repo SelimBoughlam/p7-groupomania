@@ -88,11 +88,13 @@ exports.login = (req, res) => {
             );
             res.status(200).json({ userId: user.id, token });
           } else {
-            return res.status(401).json({ error: "mot de passe incorrect!" });
+            return res.status(401).json({ message: "mot de passe incorrect!" });
           }
         });
       } else {
-        return res.status(401).json({ error: "cet utilisateur n'existe pas" });
+        return res
+          .status(401)
+          .json({ message: "cet utilisateur n'existe pas" });
       }
     })
     .catch((error) =>

@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const emailRegex =
   // eslint-disable-next-line no-useless-escape
@@ -9,6 +10,7 @@ const emailRegex =
 const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,255}$/;
 
 const SignupForm = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -28,7 +30,7 @@ const SignupForm = () => {
       })
         .then((res) => {
           if (res.status === 201) {
-            window.location = "/";
+            navigate("/connexion");
           }
         })
         .catch((error) => {
