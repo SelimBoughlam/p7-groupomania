@@ -1,0 +1,26 @@
+.message-modal {
+  background-color: rgb(231, 236, 236);
+  width: 50%;
+  margin: 0 auto;
+  border-radius: 10px;
+  margin-bottom: 2em;
+
+  .profil-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .image-container {
+    img {
+      margin: 1em;
+      height: 3em;
+      clip-path: ellipse(50% 50%);
+    }
+  }
+  .message-container {
+    height: auto;
+    text-align: center;
+    padding: 1em;
+  }
+}

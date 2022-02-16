@@ -1,11 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const location = useLocation();
+
   const {
     register,
     handleSubmit,
@@ -15,20 +15,17 @@ const LoginForm = () => {
     mode: "onTouched",
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if (isValid) {
-      axios({
+      await axios({
         method: "post",
         url: "http://localhost:5000/api/auth/login",
         withCredentials: false,
         data: data,
       })
         .then((res) => {
-          console.log(res);
-          localStorage.setItem("user", JSON.stringify(res.data));
-          if (location.state?.from) {
-            navigate(location.state.from);
-          }
+          localStorage.setItem("user", JSON.stringify(res.data.token));
+          navigate("/actualites");
         })
         .catch((error) => {
           if (error.response.data.message === "cet utilisateur n'existe pas") {
