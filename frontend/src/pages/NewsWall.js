@@ -4,15 +4,16 @@ import { useNavigate } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
 import Forum from "../components/Forum";
+import PostMessage from "../components/PostMessage";
 
 const NewsWall = () => {
   const [apiData, setApiData] = useState([]);
 
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("user"));
+    const header = JSON.parse(localStorage.getItem("user"));
     axios
       .get("http://localhost:5000/api/messages/all", {
-        headers: { Authorization: "bearer " + token },
+        headers: { Authorization: "bearer " + header.token },
       })
       .then((res) => setApiData(res.data));
   }, []);
@@ -41,6 +42,7 @@ const NewsWall = () => {
       </div>
 
       <div className="allposts">
+        <PostMessage message={apiData} />
         {apiData.map((message) => (
           <Forum key={message.id} message={message} />
         ))}

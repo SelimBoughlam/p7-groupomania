@@ -18,14 +18,7 @@ const Forum = ({ message }) => {
       </div>
 
       <div className="message-container">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed odio
-          sequi nihil ipsam recusandae quos, fugiat reprehenderit quasi modi
-          obcaecati id eligendi quaerat incidunt soluta eum eius odit inventore
-          nulla, unde earum illo. Eos, veritatis commodi sequi voluptatibus
-          autem animi, sunt iusto, debitis architecto adipisci quaerat eaque nam
-          voluptate inventore.
-        </p>
+        <p>{message.content}</p>
       </div>
     </div>
   );

@@ -24,7 +24,7 @@ const LoginForm = () => {
         data: data,
       })
         .then((res) => {
-          localStorage.setItem("user", JSON.stringify(res.data.token));
+          localStorage.setItem("user", JSON.stringify(res.data));
           navigate("/actualites");
         })
         .catch((error) => {
