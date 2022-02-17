@@ -1,4 +1,5 @@
 import React from "react";
+import DeleteMessage from "./DeleteMessage";
 
 const Forum = ({ message }) => {
   return (
@@ -20,6 +21,7 @@ const Forum = ({ message }) => {
       <div className="message-container">
         <p>{message.content}</p>
       </div>
+      <DeleteMessage message={message} />
     </div>
   );
 };
