@@ -19,7 +19,7 @@ const PostMessage = () => {
     data.append("userId", userInfos.userId);
     data.append("content", content.content);
     data.append("image", image);
-    console.log(data);
+
     const headers = {
       Authorization: "bearer " + userInfos.token,
     };
@@ -60,8 +60,3 @@ const PostMessage = () => {
 };
 
 export default PostMessage;
-
-// const data = {
-//     userId: userInfos.userId,
-//     content: content.content,
-//   };
