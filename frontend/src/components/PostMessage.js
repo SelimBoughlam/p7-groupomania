@@ -1,36 +1,40 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const PostMessage = () => {
+  const [image, setImage] = useState();
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({
     mode: "onTouched",
   });
   const userInfos = JSON.parse(localStorage.getItem("user"));
 
   const onSubmit = (content) => {
-    const data = { userId: userInfos.userId, content: content.content };
+    const data = new FormData();
+    data.append("userId", userInfos.userId);
+    data.append("content", content.content);
+    data.append("image", image);
+    console.log(data);
     const headers = {
       Authorization: "bearer " + userInfos.token,
     };
 
-    if (isValid) {
-      axios
-        .post("http://localhost:5000/api/messages/new", data, {
-          headers: headers,
-        })
+    axios
+      .post("http://localhost:5000/api/messages/new", data, {
+        headers: headers,
+      })
 
-        .then((res) => window.location.reload())
-        .catch((error) => console.log(error.response));
-    }
+      .then((res) => {
+        window.location.reload();
+        setImage("");
+      })
+      .catch((error) => console.log(error.response));
   };
-  // TODO fonction qui récupère le token dans le LS
-
-  // TODO fonction qui récupère user id de la personne connecté
 
   return (
     <div className="post-message">
@@ -44,6 +48,11 @@ const PostMessage = () => {
         {errors.content && errors.content.type === "required" && (
           <span>Votre message ne peut être vide</span>
         )}
+        <input
+          type="file"
+          name="image"
+          onChange={(e) => setImage(e.target.files[0])}
+        />
         <input type="submit" value="envoyer" />
       </form>
     </div>
@@ -51,3 +60,8 @@ const PostMessage = () => {
 };
 
 export default PostMessage;
+
+// const data = {
+//     userId: userInfos.userId,
+//     content: content.content,
+//   };

@@ -20,6 +20,7 @@ const Forum = ({ message }) => {
 
       <div className="message-container">
         <p>{message.content}</p>
+        <img src={message.image} alt="" />
       </div>
       <DeleteMessage message={message} />
     </div>
