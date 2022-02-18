@@ -129,19 +129,3 @@ const SignupForm = () => {
 };
 
 export default SignupForm;
-
-// axios({
-//     method: "post",
-//     url: "http://localhost:5000/api/auth/signup",
-//     withCredentials: false,
-//     data: {
-//       firstName,
-//       lastName,
-//       email,
-//       password,
-//     },
-//   })
-//     .then((res) => {
-//       console.log(res);
-//     })
-//     .catch((error) => console.log(error));
