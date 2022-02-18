@@ -39,7 +39,7 @@ exports.getAllMessages = (req, res) => {
 
 // update a message
 exports.updateMessage = (req, res) => {
-  models.Message.findOne({ id: req.params.id })
+  models.Message.findOne({ where: { id: req.params.id } })
     .then((message) => {
       if (!message) {
         res.status(400).json({ message: "ce message n'existe pas!" });
@@ -53,15 +53,11 @@ exports.updateMessage = (req, res) => {
           ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
           : null,
       };
-      const filename = message.image.split("/images/")[1];
-      // deleting modified image from image file
-      fs.unlink(`images/${filename}`, () => {
-        models.Message.update(messageToUpadate, {
-          where: { id: req.params.id, userId: req.auth.userId },
-        })
-          .then(res.status(200).json({ message: "message modifié!" }))
-          .catch((error) => res.status(500).json("une erreur est survenue!"));
-      });
+      models.Message.update(messageToUpadate, {
+        where: { id: req.params.id, userId: req.auth.userId },
+      })
+        .then(res.status(200).json({ message: "message modifié!" }))
+        .catch((error) => res.status(500).json("une erreur est survenue!"));
     })
 
     .catch((error) =>
