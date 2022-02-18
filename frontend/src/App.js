@@ -5,6 +5,9 @@ import Signup from "./components/users/Signup";
 import Home from "./pages/Home";
 import NewsWall from "./pages/NewsWall";
 import Profile from "./pages/Profile";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
 
 const App = () => {
   return (
