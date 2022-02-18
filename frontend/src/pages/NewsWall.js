@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
-import Forum from "../components/Forum";
-import PostMessage from "../components/PostMessage";
+import Forum from "../components/posts/Forum";
+import PostMessage from "../components/posts/PostMessage";
 
 const NewsWall = () => {
   const [apiData, setApiData] = useState([]);

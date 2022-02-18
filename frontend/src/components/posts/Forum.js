@@ -1,5 +1,6 @@
 import React from "react";
 import DeleteMessage from "./DeleteMessage";
+import UpdateMessage from "./UpdateMessage";
 
 const Forum = ({ message }) => {
   const dateFormat = (date) => {
@@ -28,6 +29,7 @@ const Forum = ({ message }) => {
         <img src={message.image} alt="" />
       </div>
       <DeleteMessage message={message} />
+      <UpdateMessage message={message} />
     </div>
   );
 };
