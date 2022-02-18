@@ -5,6 +5,7 @@ import Modal from "react-modal";
 
 const UpdateMessage = ({ message }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const userChecking = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     const userId = user.userId;
@@ -26,7 +27,9 @@ const UpdateMessage = ({ message }) => {
         <h2>modal Title</h2>
         <p>modal body</p>
         <input type="text" />
-        <button onClick={() => setModalIsOpen(false)}>Fermer</button>
+        <button className="update-btn" onClick={() => setModalIsOpen(false)}>
+          Modifier mon message
+        </button>
       </Modal>
     </div>
   );

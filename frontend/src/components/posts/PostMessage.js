@@ -43,9 +43,15 @@ const PostMessage = () => {
           name="content"
           type="text"
           placeholder="Entrez votre message"
-          {...register("content", { required: true })}
+          {...register("content", {
+            required: true,
+            pattern: /^(\s+\S+\s*)*(?!\s).*$/,
+          })}
         />
         {errors.content && errors.content.type === "required" && (
+          <span>Votre message ne peut être vide</span>
+        )}
+        {errors.content && errors.content.type === "pattern" && (
           <span>Votre message ne peut être vide</span>
         )}
         <input
