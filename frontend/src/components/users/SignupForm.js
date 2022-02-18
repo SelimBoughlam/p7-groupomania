@@ -54,9 +54,15 @@ const SignupForm = () => {
           name="lastname"
           id="lastname"
           placeholder="Nom"
-          {...register("lastName", { required: true })}
+          {...register("lastName", {
+            required: true,
+            pattern: /^(\s+\S+\s*)*(?!\s).*$/,
+          })}
         />
         {errors.lastName && errors.lastName.type === "required" && (
+          <span>Veuillez entrer votre nom</span>
+        )}
+        {errors.lastName && errors.lastName.type === "pattern" && (
           <span>Veuillez entrer votre nom</span>
         )}
 
@@ -66,9 +72,15 @@ const SignupForm = () => {
           name="firstname"
           id="firstname"
           placeholder="Prénom"
-          {...register("firstName", { required: true })}
+          {...register("firstName", {
+            required: true,
+            pattern: /^(\s+\S+\s*)*(?!\s).*$/,
+          })}
         />
         {errors.firstName && errors.firstName.type === "required" && (
+          <span>Veuillez entrer votre prénom</span>
+        )}
+        {errors.firstName && errors.firstName.type === "pattern" && (
           <span>Veuillez entrer votre prénom</span>
         )}
 
