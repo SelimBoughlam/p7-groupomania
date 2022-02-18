@@ -4,7 +4,7 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 import Signup from "./components/Signup";
 import Home from "./pages/Home";
 import NewsWall from "./pages/NewsWall";
-import ProfilUpdate from "./pages/ProfilUpdate";
+import Profile from "./pages/Profile";
 
 const App = () => {
   return (
@@ -14,9 +14,9 @@ const App = () => {
       <Route path="/connexion" element={<Login />} />
       <Route element={<ProtectedRoutes />}>
         <Route path="/actualites" element={<NewsWall />} />
+        <Route path="/mon-profil" element={<Profile />} />
       </Route>
 
-      <Route path="/modifiez-votre-profil" element={<ProfilUpdate />} />
       <Route path="*" element={<Home />} />
     </Routes>
   );

@@ -2,6 +2,11 @@ import React from "react";
 import DeleteMessage from "./DeleteMessage";
 
 const Forum = ({ message }) => {
+  const dateFormat = (date) => {
+    const oldDate = new Date(date);
+    return oldDate.toLocaleDateString();
+  };
+
   return (
     <div className="message-modal">
       <div className="profil-container">
@@ -14,7 +19,7 @@ const Forum = ({ message }) => {
         </div>
 
         <div className="date">
-          <span>{message.createdAt}</span>
+          <span>{dateFormat(message.createdAt)}</span>
         </div>
       </div>
 

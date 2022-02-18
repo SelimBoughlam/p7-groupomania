@@ -31,7 +31,7 @@ const NewsWall = () => {
           <h1>Groupomania</h1>
         </div>
         <div className="nav">
-          <button>
+          <button onClick={() => navigate("/mon-profil")}>
             <ImProfile />
             Mon compte
           </button>
