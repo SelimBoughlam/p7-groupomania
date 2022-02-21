@@ -18,9 +18,12 @@ exports.getOneUser = (req, res) => {
   models.User.findByPk(req.params.id, {
     attributes: { exclude: ["password"] },
   })
+
     .then((user) => {
       if (!user) {
         res.status(404).json({ message: "utilisateur non trouvé!" });
+      } else if (req.auth.userId != req.params.id) {
+        return res.status(403).json({ message: "requête non autorisée!" });
       } else {
         res.status(200).json(user);
       }
