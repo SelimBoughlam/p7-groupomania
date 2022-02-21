@@ -1,7 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const user = localStorage.getItem("user");
+  if (user) {
+    navigate("/actualites");
+  }
+
   return (
     <div className="home-page">
       <Header />

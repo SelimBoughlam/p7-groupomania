@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 
 const UpdateMessage = ({ message }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [image, setImage] = useState();
 
   const {
     register,
@@ -21,8 +22,11 @@ const UpdateMessage = ({ message }) => {
     Authorization: "bearer " + userInfos.token,
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (content) => {
+    const data = new FormData();
+    data.append("content", content.content);
+    data.append("image", image);
+
     axios
       .put(`http://localhost:5000/api/messages/${messageId}`, data, {
         headers: headers,
@@ -53,8 +57,10 @@ const UpdateMessage = ({ message }) => {
       )}
       <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
         <h2>modal Title</h2>
-        <p>modal body</p>
+
         <form onSubmit={handleSubmit(onSubmit)}>
+          <img className="update-img" src={message.image} alt="" />
+          <input type="file" onChange={(e) => setImage(e.target.files[0])} />
           <input
             type="text"
             defaultValue={message.content}
@@ -69,11 +75,7 @@ const UpdateMessage = ({ message }) => {
           {errors.content && errors.content.type === "pattern" && (
             <span>Votre message ne peut être vide</span>
           )}
-          <button
-            type="submit"
-            className="update-btn"
-            // onClick={() => setModalIsOpen(false)}
-          >
+          <button type="submit" className="update-btn">
             Modifier mon message
           </button>
         </form>
