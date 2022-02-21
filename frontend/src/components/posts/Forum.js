@@ -1,18 +1,25 @@
 import React from "react";
 import DeleteMessage from "./DeleteMessage";
 import UpdateMessage from "./UpdateMessage";
+import randomUser from "./random-user.png";
 
 const Forum = ({ message }) => {
   const dateFormat = (date) => {
     const oldDate = new Date(date);
     return oldDate.toLocaleDateString();
   };
+  console.log(message);
 
   return (
     <div className="message-modal">
       <div className="profil-container">
         <div className="image-container">
-          <img src="" alt="" />
+          <img
+            src={
+              message.User.profileImage ? message.User.profileImage : randomUser
+            }
+            alt=""
+          />
         </div>
 
         <div className="name-container">

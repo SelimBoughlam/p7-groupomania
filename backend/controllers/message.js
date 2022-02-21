@@ -27,7 +27,7 @@ exports.getAllMessages = (req, res) => {
     include: [
       {
         model: models.User,
-        attributes: ["firstName", "lastName"],
+        attributes: ["firstName", "lastName", "profileImage"],
       },
     ],
   })
