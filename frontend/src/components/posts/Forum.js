@@ -8,7 +8,6 @@ const Forum = ({ message }) => {
     const oldDate = new Date(date);
     return oldDate.toLocaleDateString();
   };
-  console.log(message);
 
   return (
     <div className="message-modal">
