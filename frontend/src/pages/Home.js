@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../components/Header";
+
+import Signup from "../components/users/Signup";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -13,14 +14,7 @@ const Home = () => {
 
   return (
     <div className="home-page">
-      <Header />
-      <div className="presentation">
-        <h1>Bienvenue sur votre réseau social d'entreprise!</h1>
-        <p>
-          Afin de profiter de la version test de votre nouvel outil,Veuillez
-          créer un compte et vous identifier.
-        </p>
-      </div>
+      <Signup />
     </div>
   );
 };
