@@ -21,7 +21,7 @@ const NewsWall = () => {
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("user");
-    navigate("/");
+    navigate("/connexion");
   };
 
   return (

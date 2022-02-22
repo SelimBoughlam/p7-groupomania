@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -82,6 +82,9 @@ const LoginForm = () => {
           {errors.password && errors.password.type === "server" && (
             <span>{errors.password.message}</span>
           )}
+          <NavLink to={"/"}>
+            <p>pas de compte? créez en un</p>
+          </NavLink>
           <input type="submit" value="Se connecter" />
         </div>
       </form>
