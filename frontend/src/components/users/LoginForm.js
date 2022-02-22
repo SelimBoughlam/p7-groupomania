@@ -47,38 +47,43 @@ const LoginForm = () => {
   return (
     <div className="form-container ">
       <form onSubmit={handleSubmit(onSubmit)} id="login-form">
-        <h1>Se connecter</h1>
+        <div className="header">
+          <h3>Bienvenue chez Groupomania </h3>
+          <p>Se connecter</p>
+        </div>
+        <div className="separator"></div>
+        <div className="inputs">
+          <input
+            aria-label="email"
+            type="text"
+            name="email"
+            id="email"
+            placeholder="Email"
+            {...register("email", { required: true })}
+          />
+          {errors.email && errors.email.type === "required" && (
+            <span>Veuillez entrer votre email</span>
+          )}
+          {errors.email && errors.email.type === "server" && (
+            <span>{errors.email.message}</span>
+          )}
 
-        <input
-          aria-label="email"
-          type="text"
-          name="email"
-          id="email"
-          placeholder="Email"
-          {...register("email", { required: true })}
-        />
-        {errors.email && errors.email.type === "required" && (
-          <span>Veuillez entrer votre email</span>
-        )}
-        {errors.email && errors.email.type === "server" && (
-          <span>{errors.email.message}</span>
-        )}
-
-        <input
-          aria-label="mot de passe"
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Mot de passe"
-          {...register("password", { required: true })}
-        />
-        {errors.password && errors.password.type === "required" && (
-          <span>Veuillez entrer votre mot de passe</span>
-        )}
-        {errors.password && errors.password.type === "server" && (
-          <span>{errors.password.message}</span>
-        )}
-        <input type="submit" value="Se connecter" />
+          <input
+            aria-label="mot de passe"
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Mot de passe"
+            {...register("password", { required: true })}
+          />
+          {errors.password && errors.password.type === "required" && (
+            <span>Veuillez entrer votre mot de passe</span>
+          )}
+          {errors.password && errors.password.type === "server" && (
+            <span>{errors.password.message}</span>
+          )}
+          <input type="submit" value="Se connecter" />
+        </div>
       </form>
     </div>
   );
