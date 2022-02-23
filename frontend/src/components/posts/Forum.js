@@ -21,7 +21,7 @@ const Forum = ({ message }) => {
         </div>
 
         <div className="date">
-          <span></span>
+          <span>{message.createdAt}</span>
         </div>
       </div>
 

@@ -29,8 +29,8 @@ const NewsWall = () => {
   };
 
   return (
-    <div className="forum">
-      <div className="forum-header">
+    <div className="newsWall">
+      <div className="newsWall-header">
         <button onClick={logout}>
           <FaSignOutAlt className="icon" />
           <span>Se déconnecter</span>
@@ -41,8 +41,9 @@ const NewsWall = () => {
           <span>Mon compte</span>
         </button>
       </div>
+      <PostMessage />
+
       <div className="allposts">
-        <PostMessage message={apiData} />
         {apiData.map((message) => (
           <Forum key={message.id} message={message} />
         ))}

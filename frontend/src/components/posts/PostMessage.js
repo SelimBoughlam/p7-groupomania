@@ -1,9 +1,22 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 const PostMessage = () => {
   const [image, setImage] = useState();
+  const [preview, setpreview] = useState();
+
+  useEffect(() => {
+    if (image) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setpreview(reader.result);
+      };
+      reader.readAsDataURL(image);
+    } else {
+      setpreview(null);
+    }
+  }, [image]);
 
   const {
     register,
@@ -54,12 +67,22 @@ const PostMessage = () => {
         {errors.content && errors.content.type === "pattern" && (
           <span>Votre message ne peut être vide</span>
         )}
-        <input
-          type="file"
-          name="image"
-          onChange={(e) => setImage(e.target.files[0])}
-        />
-        <input type="submit" value="envoyer" />
+
+        <div className="buttons">
+          <input type="submit" value="Publier" />
+          <label htmlFor="file" className="label">
+            image
+          </label>
+          <input
+            id="file"
+            type="file"
+            name="image"
+            onChange={(e) => setImage(e.target.files[0])}
+          />
+        </div>
+        <div className="preview">
+          {preview && <img src={preview} alt=""></img>}
+        </div>
       </form>
     </div>
   );
