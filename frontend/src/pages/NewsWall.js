@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
-import Forum from "../components/posts/Forum";
 import PostMessage from "../components/posts/PostMessage";
+import Post from "../components/posts/Post";
 
 const NewsWall = () => {
   const [apiData, setApiData] = useState([]);
@@ -45,7 +45,7 @@ const NewsWall = () => {
 
       <div className="allposts">
         {apiData.map((message) => (
-          <Forum key={message.id} message={message} />
+          <Post key={message.id} message={message} />
         ))}
       </div>
     </div>

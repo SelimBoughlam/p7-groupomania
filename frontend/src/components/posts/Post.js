@@ -3,7 +3,7 @@ import DeleteMessage from "./DeleteMessage";
 import UpdateMessage from "./UpdateMessage";
 import randomUser from "./random-user.png";
 
-const Forum = ({ message }) => {
+const Post = ({ message }) => {
   return (
     <div className="message-modal">
       <div className="profil-container">
@@ -35,4 +35,4 @@ const Forum = ({ message }) => {
   );
 };
 
-export default Forum;
+export default Post;

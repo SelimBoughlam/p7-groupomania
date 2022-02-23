@@ -68,9 +68,11 @@
     }
   }
   img {
-    width: 400px;
-    height: 200px;
-    object-fit: contain;
+    width: auto;
+    max-width: 500px;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
   }
   .preview {
     display: flex;
