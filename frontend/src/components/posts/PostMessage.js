@@ -29,7 +29,7 @@ const PostMessage = () => {
         headers: headers,
       })
 
-      .then((res) => {
+      .then(() => {
         window.location.reload();
         setImage("");
       })

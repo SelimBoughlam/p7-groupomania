@@ -8,6 +8,7 @@ import PostMessage from "../components/posts/PostMessage";
 
 const NewsWall = () => {
   const [apiData, setApiData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const header = JSON.parse(localStorage.getItem("user"));
@@ -18,29 +19,28 @@ const NewsWall = () => {
       .then((res) => setApiData(res.data));
   }, []);
 
-  const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("user");
     navigate("/connexion");
   };
 
+  const goToProfile = () => {
+    navigate("/mon-profil");
+  };
+
   return (
     <div className="forum">
-      <div className="header-forum">
-        <div className="logo">
-          <h1>Groupomania</h1>
-        </div>
-        <div className="nav">
-          <button onClick={() => navigate("/mon-profil")}>
-            <ImProfile />
-            Mon compte
-          </button>
-          <button onClick={logout}>
-            <FaSignOutAlt /> Se déconnecter
-          </button>
-        </div>
-      </div>
+      <div className="forum-header">
+        <button onClick={logout}>
+          <FaSignOutAlt className="icon" />
+          <span>Se déconnecter</span>
+        </button>
 
+        <button onClick={goToProfile}>
+          <ImProfile className="icon" />
+          <span>Mon compte</span>
+        </button>
+      </div>
       <div className="allposts">
         <PostMessage message={apiData} />
         {apiData.map((message) => (

@@ -4,11 +4,6 @@ import UpdateMessage from "./UpdateMessage";
 import randomUser from "./random-user.png";
 
 const Forum = ({ message }) => {
-  const dateFormat = (date) => {
-    const oldDate = new Date(date);
-    return oldDate.toLocaleDateString();
-  };
-
   return (
     <div className="message-modal">
       <div className="profil-container">
@@ -26,7 +21,7 @@ const Forum = ({ message }) => {
         </div>
 
         <div className="date">
-          <span>{dateFormat(message.createdAt)}</span>
+          <span></span>
         </div>
       </div>
 
