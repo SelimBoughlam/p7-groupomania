@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsFillPencilFill } from "react-icons/bs";
 import Modal from "react-modal";
 import { useForm } from "react-hook-form";
@@ -8,6 +8,19 @@ import { IconContext } from "react-icons/lib";
 const UpdateMessage = ({ message }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [image, setImage] = useState();
+  const [preview, setpreview] = useState();
+
+  useEffect(() => {
+    if (image) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setpreview(reader.result);
+      };
+      reader.readAsDataURL(image);
+    } else {
+      setpreview(null);
+    }
+  }, [image]);
 
   const {
     register,
@@ -60,29 +73,42 @@ const UpdateMessage = ({ message }) => {
       </IconContext.Provider>
 
       <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
-        <h2>modal Title</h2>
+        <div className="form-update-container">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            {preview && <img id="preview" src={preview} alt=""></img>}
+            <div className="input">
+              <input
+                type="text"
+                defaultValue={message.content}
+                {...register("content", {
+                  required: true,
+                  pattern: /^(\s+\S+\s*)*(?!\s).*$/,
+                })}
+              />
+              {errors.content && errors.content.type === "required" && (
+                <span>Votre message ne peut être vide</span>
+              )}
+              {errors.content && errors.content.type === "pattern" && (
+                <span>Votre message ne peut être vide</span>
+              )}
+            </div>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <img className="update-img" src={message.image} alt="" />
-          <input type="file" onChange={(e) => setImage(e.target.files[0])} />
-          <input
-            type="text"
-            defaultValue={message.content}
-            {...register("content", {
-              required: true,
-              pattern: /^(\s+\S+\s*)*(?!\s).*$/,
-            })}
-          />
-          {errors.content && errors.content.type === "required" && (
-            <span>Votre message ne peut être vide</span>
-          )}
-          {errors.content && errors.content.type === "pattern" && (
-            <span>Votre message ne peut être vide</span>
-          )}
-          <button type="submit" className="update-btn">
-            Modifier mon message
-          </button>
-        </form>
+            <div className="buttons">
+              <label htmlFor="files" className="label">
+                image
+              </label>
+              <input
+                id="files"
+                type="file"
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+
+              <button type="submit" className="update-btn">
+                Modifier mon message
+              </button>
+            </div>
+          </form>
+        </div>
       </Modal>
     </div>
   );
