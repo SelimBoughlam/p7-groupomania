@@ -75,7 +75,11 @@ const UpdateMessage = ({ message }) => {
       <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
         <div className="form-update-container">
           <form onSubmit={handleSubmit(onSubmit)}>
-            {preview && <img id="preview" src={preview} alt=""></img>}
+            {preview ? (
+              <img id="preview" src={preview} alt=""></img>
+            ) : (
+              message.image && <img src={message.image} alt=""></img>
+            )}
             <div className="input">
               <input
                 type="text"
