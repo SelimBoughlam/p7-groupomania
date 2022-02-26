@@ -15,22 +15,29 @@ const Post = ({ message }) => {
             alt=""
           />
         </div>
+        <div className="name-date">
+          <div className="name-container">
+            <h4>{message.User.firstName + " " + message.User.lastName}</h4>
+          </div>
 
-        <div className="name-container">
-          <h4>{message.User.firstName + " " + message.User.lastName}</h4>
-        </div>
-
-        <div className="date">
-          <span>{message.createdAt}</span>
+          <div className="date">
+            <span>{message.createdAt}</span>
+          </div>
         </div>
       </div>
 
       <div className="message-container">
         <p>{message.content}</p>
-        <img src={message.image} alt="" />
+        {message.image && <img src={message.image} alt="" />}
       </div>
-      <DeleteMessage message={message} />
-      <UpdateMessage message={message} />
+      <div className="edit-delete">
+        <div className="edit">
+          <UpdateMessage message={message} />
+        </div>
+        <div className="delete">
+          <DeleteMessage message={message} />
+        </div>
+      </div>
     </div>
   );
 };

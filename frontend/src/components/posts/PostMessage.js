@@ -76,6 +76,7 @@ const PostMessage = () => {
           <input
             id="file"
             type="file"
+            accept="image/*"
             name="image"
             onChange={(e) => setImage(e.target.files[0])}
           />

@@ -18,7 +18,7 @@ exports.getAllComments = (req, res) => {
   models.Comment.findAll({
     include: [
       { model: models.User, attributes: ["firstName", "lastName"] },
-      { model: models.Message, attributes: ["content"] },
+      { model: models.Message, attributes: ["userId"] },
     ],
   })
     .then((comments) => {

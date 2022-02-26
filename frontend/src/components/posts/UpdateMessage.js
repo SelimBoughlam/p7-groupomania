@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { BsFillPencilFill } from "react-icons/bs";
 import Modal from "react-modal";
 import { useForm } from "react-hook-form";
+import { IconContext } from "react-icons/lib";
 
 const UpdateMessage = ({ message }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -50,11 +51,14 @@ const UpdateMessage = ({ message }) => {
   };
   return (
     <div className="update-message">
-      {userChecking() && (
-        <div onClick={() => setModalIsOpen(true)}>
-          <BsFillPencilFill />
-        </div>
-      )}
+      <IconContext.Provider value={{ size: "1.5em", className: "editIcon" }}>
+        {userChecking() && (
+          <div onClick={() => setModalIsOpen(true)}>
+            <BsFillPencilFill />
+          </div>
+        )}
+      </IconContext.Provider>
+
       <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
         <h2>modal Title</h2>
 

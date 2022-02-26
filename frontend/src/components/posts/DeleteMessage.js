@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { BsTrash } from "react-icons/bs";
+import { IconContext } from "react-icons/lib";
 
 const DeleteMessage = ({ message }) => {
   const deleteMessage = () => {
@@ -9,12 +10,14 @@ const DeleteMessage = ({ message }) => {
     const headers = {
       Authorization: "bearer " + userInfos.token,
     };
-
-    axios
-      .delete(`http://localhost:5000/api/messages/${messageId}`, {
-        headers: headers,
-      })
-      .then((res) => window.location.reload());
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm("Etes-vous sûr de vouloir supprimer votre publication?")) {
+      axios
+        .delete(`http://localhost:5000/api/messages/${messageId}`, {
+          headers: headers,
+        })
+        .then((res) => window.location.reload());
+    }
   };
 
   const userChecking = () => {
@@ -29,7 +32,11 @@ const DeleteMessage = ({ message }) => {
   };
   return (
     <div className="deleteMessage">
-      <div onClick={deleteMessage}>{userChecking() && <BsTrash />}</div>
+      <IconContext.Provider
+        value={{ size: "1.5em", color: "red", className: "trash" }}
+      >
+        <div onClick={deleteMessage}>{userChecking() && <BsTrash />}</div>
+      </IconContext.Provider>
     </div>
   );
 };

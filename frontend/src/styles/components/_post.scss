@@ -1,6 +1,6 @@
 .message-modal {
   background-color: white;
-  width: 40%;
+  width: 50%;
   margin: 5em auto;
   border-radius: 10px;
   margin-bottom: 2em;
@@ -8,18 +8,34 @@
 
   .profil-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    // justify-content: space-between;
+    // align-items: center;
     background: rgb(247, 244, 244);
     border-radius: 10px 10px 0px 0px;
     padding: 0.5em;
   }
+  .name-container {
+    margin-bottom: 0.5em;
+    font-size: 1.1em;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+  .name-date {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
   .image-container {
+    margin-right: 2em;
+    border-radius: 50%;
+    border: 1px solid rgba(71, 75, 74, 0.151);
+    height: 64px;
+    width: 64px;
     img {
-      margin: 1em;
-      height: 2em;
-      clip-path: ellipse(50% 50%);
+      border-radius: 50%;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
     }
   }
   .message-container {
@@ -27,9 +43,33 @@
     text-align: center;
     padding: 1em;
     img {
+      border: 1px solid rgba(0, 0, 0, 0.24);
       height: 100%;
-      width: 100%;
+      width: 90%;
       object-fit: contain;
+      border-radius: 10px;
+    }
+    p {
+      margin-bottom: 1em;
+      font-size: 1.1em;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+  }
+  .edit-delete {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1em;
+  }
+  .trash {
+    margin-left: 2em;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+  .editIcon {
+    color: rgb(79, 79, 179);
+    &:hover {
+      transform: scale(1.2);
     }
   }
 }
