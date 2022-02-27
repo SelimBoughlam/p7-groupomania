@@ -25,11 +25,11 @@ exports.getAllMessages = (req, res) => {
   models.Message.findAll({
     order: [["updatedAt", "DESC"]],
     include: [
+      { model: models.User, attributes: ["firstName", "lastName"] },
       {
-        model: models.User,
-        attributes: ["firstName", "lastName", "profileImage"],
+        model: models.Comment,
+        include: { model: models.User, attributes: ["firstName", "lastName"] },
       },
-      { model: models.Comment, attributes: ["userId", "comment"] },
     ],
   })
     .then((messages) => res.status(200).json(messages))
