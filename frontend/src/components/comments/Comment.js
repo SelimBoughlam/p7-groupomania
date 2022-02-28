@@ -1,4 +1,5 @@
 import React from "react";
+import DeleteComment from "./DeleteComment";
 
 const Comment = ({ message }) => {
   const commentArray = message.Comments;
@@ -14,6 +15,9 @@ const Comment = ({ message }) => {
             </div>
             <div className="comment-content">
               <p>{comment.comment}</p>
+            </div>
+            <div>
+              <DeleteComment comment={comment} />
             </div>
           </div>
         </div>
