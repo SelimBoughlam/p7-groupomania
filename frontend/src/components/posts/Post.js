@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import DeleteMessage from "./DeleteMessage";
 import UpdateMessage from "./UpdateMessage";
 import randomUser from "./random-user.png";
+import Comment from "../comments/Comment";
 
 const Post = ({ message }) => {
+  const [showComments, setShowComments] = useState(false);
   return (
     <div className="message-modal">
       <div className="profil-container">
@@ -38,6 +40,25 @@ const Post = ({ message }) => {
           <DeleteMessage message={message} />
         </div>
       </div>
+
+      <div className="comment-toggle">
+        {message.Comments[0] && (
+          <button
+            onClick={() => {
+              setShowComments(!showComments);
+            }}
+          >
+            {showComments
+              ? "Masquer les commentaires"
+              : "Voir les commentaires"}
+          </button>
+        )}
+      </div>
+      {showComments ? (
+        <div className="comment-container">
+          <Comment message={message} />
+        </div>
+      ) : null}
     </div>
   );
 };

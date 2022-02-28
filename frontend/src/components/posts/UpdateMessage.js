@@ -108,7 +108,7 @@ const UpdateMessage = ({ message }) => {
               />
 
               <button type="submit" className="update-btn">
-                Modifier mon message
+                Valider
               </button>
             </div>
           </form>
