@@ -4,6 +4,8 @@ import UpdateMessage from "./UpdateMessage";
 import randomUser from "./random-user.png";
 import Comment from "../comments/Comment";
 import PostComment from "../comments/PostComment";
+import dayjs from "dayjs";
+import "dayjs/locale/fr";
 
 const Post = ({ message }) => {
   const [showComments, setShowComments] = useState(false);
@@ -24,7 +26,11 @@ const Post = ({ message }) => {
           </div>
 
           <div className="date">
-            <span>{message.createdAt}</span>
+            <span>
+              {dayjs(message.createdAt)
+                .locale("fr")
+                .format(`le DD/MM/YY à HH[h]mm`)}
+            </span>
           </div>
         </div>
       </div>

@@ -1,6 +1,8 @@
 import React from "react";
 import DeleteComment from "./DeleteComment";
 import { IconContext } from "react-icons/lib";
+import dayjs from "dayjs";
+import "dayjs/locale/fr";
 
 const Comment = ({ message }) => {
   const commentArray = message.Comments;
@@ -12,7 +14,12 @@ const Comment = ({ message }) => {
           <div className="comment-container">
             <div className="comment-profile">
               <h5>{comment.User.firstName + " " + comment.User.lastName}</h5>
-              <span>{comment.createdAt}</span>
+
+              <span>
+                {dayjs(comment.createdAt)
+                  .locale("fr")
+                  .format(`le DD/MM/YY à HH[h]mm`)}
+              </span>
             </div>
             <div className="comment-content">
               <p>{comment.comment}</p>
