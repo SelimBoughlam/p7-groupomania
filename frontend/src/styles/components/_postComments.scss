@@ -1,0 +1,22 @@
+.post-comment {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2em;
+
+  input[type="text"] {
+    height: 3em;
+    min-width: 350px;
+
+    margin-right: 0.5em;
+    padding: 0.5em;
+  }
+  input[type="submit"] {
+    height: 3em;
+    min-width: 100px;
+  }
+  .errors {
+    margin: 1em 0;
+    font-style: italic;
+    color: red;
+  }
+}

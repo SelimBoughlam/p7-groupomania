@@ -1,5 +1,6 @@
 import React from "react";
 import DeleteComment from "./DeleteComment";
+import { IconContext } from "react-icons/lib";
 
 const Comment = ({ message }) => {
   const commentArray = message.Comments;
@@ -16,9 +17,11 @@ const Comment = ({ message }) => {
             <div className="comment-content">
               <p>{comment.comment}</p>
             </div>
-            <div>
-              <DeleteComment comment={comment} />
-            </div>
+            <IconContext.Provider value={{ color: "red" }}>
+              <div className="delete-comment">
+                <DeleteComment comment={comment} />
+              </div>
+            </IconContext.Provider>
           </div>
         </div>
       ))}

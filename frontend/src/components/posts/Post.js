@@ -3,6 +3,7 @@ import DeleteMessage from "./DeleteMessage";
 import UpdateMessage from "./UpdateMessage";
 import randomUser from "./random-user.png";
 import Comment from "../comments/Comment";
+import PostComment from "../comments/PostComment";
 
 const Post = ({ message }) => {
   const [showComments, setShowComments] = useState(false);
@@ -40,7 +41,7 @@ const Post = ({ message }) => {
           <DeleteMessage message={message} />
         </div>
       </div>
-
+      <PostComment message={message} />
       <div className="comment-toggle">
         {message.Comments[0] && (
           <button

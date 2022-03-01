@@ -2,7 +2,7 @@ const models = require("../models");
 
 exports.createComment = (req, res) => {
   const comment = {
-    comment: req.body.comment,
+    comment: req.body.content,
     userId: req.auth.userId,
     messageId: req.params.messageId,
   };
