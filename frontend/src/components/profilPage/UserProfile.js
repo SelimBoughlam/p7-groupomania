@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import dayjs from "dayjs";
+import "dayjs/locale/fr";
 
 const UserProfile = () => {
   const [data, setData] = useState([]);
@@ -24,10 +26,13 @@ const UserProfile = () => {
   return (
     <div className="user-profile">
       <div className="profil-container">
-        <img src={data.profileImage} alt="" />
+        {data.profileImage && <img src={data.profileImage} alt="" />}
         <h1>{data.firstName + " " + data.lastName}</h1>
         <p>{data.email}</p>
-        <span>inscrit depuis {data.createdAt}</span>
+        <span>
+          inscrit depuis{" "}
+          {dayjs(data.createdAt).locale("fr").format(`le DD/MM/YY à HH[h]mm`)}
+        </span>
       </div>
     </div>
   );
