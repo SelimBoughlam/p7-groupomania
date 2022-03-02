@@ -1,0 +1,15 @@
+.user-profile {
+  display: flex;
+  justify-content: center;
+  .profil-container {
+    border: 1px solid rgba(0, 0, 0, 0.171);
+    padding: 1em;
+    border-radius: 15px;
+    text-align: center;
+    img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+    }
+  }
+}

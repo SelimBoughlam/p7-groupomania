@@ -30,7 +30,7 @@ const UserDelete = () => {
   };
   return (
     <div>
-      <div>
+      <div className="delete-account">
         <button onClick={deleteAccount}>Supprimer votre compte</button>
       </div>
     </div>

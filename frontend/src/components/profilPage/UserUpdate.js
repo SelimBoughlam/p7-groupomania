@@ -1,10 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const UserUpdate = () => {
   const [image, setImage] = useState();
-  const navigate = useNavigate();
 
   const userInfos = JSON.parse(localStorage.getItem("user"));
   const headers = {
@@ -19,14 +17,21 @@ const UserUpdate = () => {
       .put(`http://localhost:5000/api/users/${userId}`, data, {
         headers: headers,
       })
-      .then(() => navigate("/actualites"));
+      .then(() => window.location.reload());
   };
   return (
-    <div>
+    <div className="user-update">
       <div>
-        <input type="file" onChange={(e) => setImage(e.target.files[0])} />
+        <label htmlFor="file" className="label">
+          Choisir une image de profil
+        </label>
+        <input
+          id="file"
+          type="file"
+          onChange={(e) => setImage(e.target.files[0])}
+        />
       </div>
-      <button onClick={modify}>changer image</button>
+      <button onClick={modify}>Valider mes changements</button>
     </div>
   );
 };

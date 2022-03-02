@@ -5,7 +5,7 @@ import UserUpdate from "../components/profilPage/UserUpdate";
 
 const Profile = () => {
   return (
-    <div>
+    <div className="profile">
       <UserProfile />
       <UserUpdate />
       <UserDelete />

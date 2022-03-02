@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 
 const UserProfile = () => {
   const [data, setData] = useState([]);
+  console.log(data);
 
   useEffect(() => {
     const userInfos = JSON.parse(localStorage.getItem("user"));
@@ -22,10 +23,12 @@ const UserProfile = () => {
 
   return (
     <div className="user-profile">
-      <div className="profil-container"></div>
-      <p>nom:{data.firstName}</p>
-      <p>prenom:{data.lastName}</p>
-      <img src={data.profileImage} alt="" />
+      <div className="profil-container">
+        <img src={data.profileImage} alt="" />
+        <h1>{data.firstName + " " + data.lastName}</h1>
+        <p>{data.email}</p>
+        <span>inscrit depuis {data.createdAt}</span>
+      </div>
     </div>
   );
 };
