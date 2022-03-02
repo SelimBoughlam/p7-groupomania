@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { BsTrash } from "react-icons/bs";
 import { IconContext } from "react-icons/lib";
+import jwt_decode from "jwt-decode";
 
 const DeleteMessage = ({ message }) => {
   const deleteMessage = () => {
@@ -23,8 +24,10 @@ const DeleteMessage = ({ message }) => {
   const userChecking = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     const userId = user.userId;
+    const token = user.token;
+    const decoded = jwt_decode(token);
 
-    if (message.userId === userId) {
+    if (message.userId === userId || decoded.isAdmin === true) {
       return true;
     } else {
       return false;
