@@ -61,11 +61,14 @@ exports.updateMessage = (req, res) => {
           ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
           : null,
       };
-      models.Message.update(messageToUpadate, {
-        where: { id: req.params.id, userId: req.auth.userId },
-      })
-        .then(res.status(200).json({ message: "message modifié!" }))
-        .catch((error) => res.status(500).json("une erreur est survenue!"));
+      const filename = message.image.split("/images/")[1];
+      fs.unlink(`images/${filename}`, () => {
+        models.Message.update(messageToUpadate, {
+          where: { id: req.params.id, userId: req.auth.userId },
+        })
+          .then(res.status(200).json({ message: "message modifié!" }))
+          .catch((error) => res.status(500).json("une erreur est survenue!"));
+      });
     })
 
     .catch((error) =>
@@ -81,9 +84,12 @@ exports.deleteMessage = (req, res) => {
         return res.status(404).json({ message: "ce message n'existe pas!" });
       }
       if (message.userId == req.auth.userId || req.auth.isAdmin === true) {
-        models.Message.destroy({ where: { id: req.params.id } })
-          .then(() => res.status(200).json({ message: "message supprimé!" }))
-          .catch((error) => res.status(400).json({ error }));
+        const filename = message.image.split("/images/")[1];
+        fs.unlink(`images/${filename}`, () => {
+          models.Message.destroy({ where: { id: req.params.id } })
+            .then(() => res.status(200).json({ message: "message supprimé!" }))
+            .catch((error) => res.status(400).json({ error }));
+        });
       } else {
         return res.status(403).json({ message: "requête non autorisée" });
       }
