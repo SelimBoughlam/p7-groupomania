@@ -36,8 +36,6 @@ exports.getOneUser = (req, res) => {
 // Modify user profile
 exports.updateUser = (req, res) => {
   const updateUser = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
     profileImage: req.file
       ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
       : null,

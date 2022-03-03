@@ -1,6 +1,11 @@
 .logo {
   display: flex;
   justify-content: center;
-  align-content: center;
+  margin-bottom: 3em;
   padding-top: 3em;
+  width: 100%;
+  img {
+    object-fit: cover;
+    width: 300px;
+  }
 }

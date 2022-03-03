@@ -8,8 +8,6 @@
 
   .profil-container {
     display: flex;
-    // justify-content: space-between;
-    // align-items: center;
     background: rgb(247, 244, 244);
     border-radius: 10px 10px 0px 0px;
     padding: 0.5em;
@@ -44,8 +42,11 @@
     padding: 1em;
     img {
       border: 1px solid rgba(0, 0, 0, 0.24);
-      height: 100%;
-      width: 90%;
+      height: auto;
+      max-height: 500px;
+      width: auto;
+      max-width: 700px;
+
       object-fit: contain;
       border-radius: 10px;
     }
