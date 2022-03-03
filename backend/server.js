@@ -7,12 +7,23 @@ const userRoutes = require("./routes/user");
 const messageRoutes = require("./routes/message");
 const commentRoutes = require("./routes/comment");
 const path = require("path");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
 
 // body parser from express
 app.use(express.json());
 
 // static path for images folder
 app.use("/images", express.static(path.join(__dirname, "images")));
+
+const limiter = rateLimit({
+  max: 100,
+  windowMs: 60 * 60 * 1000,
+  message: "plus de tentatives possibles,veuillez réessayer plus tard!",
+});
+app.use(limiter);
+
+app.use(helmet());
 
 //CORS
 app.use((req, res, next) => {
