@@ -3,13 +3,17 @@ const fs = require("fs");
 
 // Create message
 exports.createMessage = (req, res) => {
+  if (!req.file && !req.body.content) {
+    return res
+      .status(400)
+      .json({ message: "votre message ne peut être vide!" });
+  }
   const message = {
     userId: req.body.userId,
     content: req.body.content,
-    image:
-      req.body.content && req.file
-        ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
-        : null,
+    image: req.file
+      ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+      : null,
   };
 
   models.Message.create(message)
