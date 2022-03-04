@@ -17,7 +17,9 @@ const UserUpdate = () => {
       .put(`http://localhost:5000/api/users/${userId}`, data, {
         headers: headers,
       })
-      .then(() => window.location.reload());
+      .then(() => {
+        window.location.reload();
+      });
   };
   return (
     <div className="user-update">

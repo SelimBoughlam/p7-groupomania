@@ -64,6 +64,14 @@
 
 @media screen and(max-width:580px) {
   .newsWall {
+    .post-message {
+      form {
+        input[type="text"] {
+          height: 2em;
+          width: 60%;
+        }
+      }
+    }
     .post-comment {
       form {
         display: flex;
