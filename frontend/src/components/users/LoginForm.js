@@ -48,7 +48,7 @@ const LoginForm = () => {
     <div className="form-container ">
       <form onSubmit={handleSubmit(onSubmit)} id="login-form">
         <div className="header">
-          <h3>Bienvenue chez Groupomania </h3>
+          <h1>Bienvenue chez Groupomania </h1>
           <p>Se connecter</p>
         </div>
         <div className="separator"></div>

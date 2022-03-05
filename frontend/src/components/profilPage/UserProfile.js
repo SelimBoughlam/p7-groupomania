@@ -26,7 +26,10 @@ const UserProfile = () => {
   return (
     <div className="user-profile">
       <div className="profil-container">
-        {data.profileImage && <img src={data.profileImage} alt="" />}
+        {data.profileImage && (
+          // eslint-disable-next-line jsx-a11y/img-redundant-alt
+          <img src={data.profileImage} alt="photo de profil" />
+        )}
         <h1>{data.firstName + " " + data.lastName}</h1>
         <p>{data.email}</p>
         <span>

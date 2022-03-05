@@ -71,6 +71,7 @@ const PostMessage = () => {
         <input
           name="content"
           type="text"
+          aria-label="Entre votre message"
           placeholder="Entrez votre message"
           {...register("content", {
             pattern: /^(\s+\S+\s*)*(?!\s).*$/,
@@ -97,7 +98,10 @@ const PostMessage = () => {
           />
         </div>
         <div className="preview">
-          {preview && <img src={preview} alt=""></img>}
+          {preview && (
+            // eslint-disable-next-line jsx-a11y/img-redundant-alt
+            <img src={preview} alt="prévisualisation image avant envoie"></img>
+          )}
         </div>
       </form>
     </div>

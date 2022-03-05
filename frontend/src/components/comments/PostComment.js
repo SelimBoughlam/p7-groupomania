@@ -37,6 +37,7 @@ const PostComment = ({ message }) => {
         <input
           name="content"
           type="text"
+          aria-label="écrivez un commentaire..."
           placeholder="écrivez un commentaire..."
           {...register("content", {
             required: true,

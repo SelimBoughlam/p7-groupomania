@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState } from "react";
 import DeleteMessage from "./DeleteMessage";
 import UpdateMessage from "./UpdateMessage";
@@ -37,7 +38,7 @@ const Post = ({ message }) => {
 
       <div className="message-container">
         <p>{message.content}</p>
-        {message.image && <img src={message.image} alt="" />}
+        {message.image && <img src={message.image} alt="photo envoyée" />}
       </div>
       <div className="edit-delete">
         <div className="edit">
